@@ -1,0 +1,24 @@
+### Libray used:
+- logging - [log4js](https://github.com/log4js-node/log4js-node)
+- database - [mysql](https://github.com/mysqljs/mysql)
+- uuid - [uuid](https://github.com/broofa/node-uuid)
+
+- unit test - [mocha](https://mochajs.org/)
+- unit test - [supertest](https://github.com/visionmedia/supertest)
+
+
+
+### Run
+- development 
+``` shell
+npm run dev
+```
+
+- unit test
+```
+ npm test
+```
+
+
+
+
