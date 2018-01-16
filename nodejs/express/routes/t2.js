@@ -9,14 +9,51 @@ require('../common/dateExtend');
 
 const router = express.Router();
 
+const getUser = (userId, callback) => {
+    db.query('select * from t_users where id = ?', userId, function (error, results, fields) {
+
+        if (error) {
+            throw error;
+        }
+
+        var user = null;
+        if (results.length) {
+            user = results[0];
+        }
+        callback(user);
+    });
+};
+
+/* users listing. */
+router.post('/login', function (req, res, next) {
+    db.query('select * from t_users where name = ? limit 1', req.body.name, function (error, results, fields) {
+
+        if (error) {
+            throw error;
+        }
+        var respdata = {
+            success:false
+        };
+        if (!results.length){
+            
+        }else{
+
+        }
+        res.json(results);
+    });
+
+});
+
 /* users listing. */
 router.get('/users', function (req, res, next) {
     var limit = req.query.limit;
     limit = parseInt(limit) || 100;
     // log.debug('%s --- ',JSON.stringify(req.query));
     db.query('select * from t_users limit ?', [limit], function (error, results, fields) {
-        
-        if (error) { throw error; }
+
+        if (error) {
+            throw error;
+        }
 
         res.json(results);
     });
@@ -37,11 +74,13 @@ router.post('/users', function (req, res, next) {
 
     var ecodedpwd = null;
     var now = new Date();
-    db.query('insert into t_users values(?,?,?,?,FROM_UNIXTIME(?),FROM_UNIXTIME(?))', [user.id,user.name,hash,salt.toString('hex'),now.getUnixTime(),null], function (error, results, fields) {
-        if (error) { throw error; }
+    db.query('insert into t_users values(?,?,?,?,FROM_UNIXTIME(?),FROM_UNIXTIME(?))', [user.id, user.name, hash, salt.toString('hex'), now.getUnixTime(), null], function (error, results, fields) {
+        if (error) {
+            throw error;
+        }
 
         res.json({
-            id : user.id
+            id: user.id
         });
     });
 
@@ -50,9 +89,11 @@ router.post('/users', function (req, res, next) {
 
 /* get user by id. */
 router.get('/users/:userId', function (req, res, next) {
-    db.query('select * from t_users where id = ?',req.params.userId, function (error, results, fields) {
-        
-        if (error) { throw error; }
+    getUser(req.params.userId, function (error, results, fields) {
+
+        if (error) {
+            throw error;
+        }
 
         res.json(results);
     });

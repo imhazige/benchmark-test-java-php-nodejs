@@ -1,5 +1,5 @@
 const log = require('../common/log');
-const t = require('./base_test');
+const t = require('./baseTest');
 
 const prefix = '/t1';
 

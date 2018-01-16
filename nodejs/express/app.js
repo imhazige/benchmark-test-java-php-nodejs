@@ -8,8 +8,10 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 const log = require('./common/log');
 
 var t1 = require('./routes/t1');
+var t2 = require('./routes/t2');
 
 app.use('/t1', t1);
+app.use('/t2', t2);
 
 app.get('/', (req, res) => res.send('Hello World!'))
 

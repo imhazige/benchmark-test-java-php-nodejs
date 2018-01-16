@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha",
     "dev": "nodemon app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "pretest": "eslint ."
   },
   "author": "Ka",
   "license": "MIT",
@@ -17,8 +18,20 @@
     "uuid": "^3.1.0"
   },
   "devDependencies": {
+    "eslint": "^4.15.0",
     "mocha": "^4.1.0",
     "nodemon": "^1.14.11",
     "supertest": "^3.0.0"
+  },
+  "eslintConfig": {
+    "plugins": [],
+    "env": {},
+    "rules": {
+      "eqeqeq": "off",
+      "curly": "error"
+    },
+    "parserOptions": {
+      "ecmaVersion": 6
+    }
   }
 }
