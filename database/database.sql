@@ -22,9 +22,10 @@ DROP TABLE IF EXISTS `t_users`;
 CREATE TABLE IF NOT EXISTS `t_users` (
   `id` char(36) DEFAULT NULL,
   `name` varchar(50) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
-  `create_time` bigint(20) DEFAULT NULL,
-  `update_time` bigint(20) DEFAULT NULL
+  `password` char(32) DEFAULT NULL,
+  `salt` char(32) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- 数据导出被取消选择。

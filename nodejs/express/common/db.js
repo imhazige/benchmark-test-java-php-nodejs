@@ -1,3 +1,4 @@
+const log = require('./log');
 const mysql = require('mysql');
 
 function query(sql, args, callback) {
@@ -10,9 +11,10 @@ function query(sql, args, callback) {
 
     connection.connect();
 
-    connection.query(sql, args, function (error, results, fields) {
+    var q = connection.query(sql, args, function (error, results, fields) {
         callback(error,results,fields);        
     });
+    log.debug(`SQL:${q.sql}`);
 
     connection.end();
 }

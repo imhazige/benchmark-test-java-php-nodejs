@@ -2,3 +2,4 @@ java/springboot/.idea/
 .idea/
 .vscode/
 nodejs/express/node_modules/
+*.log

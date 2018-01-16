@@ -2,6 +2,10 @@ const express = require('express');
 const uuid = require('uuid');
 const log = require('../common/log');
 const db = require('../common/db');
+const crypto = require('crypto');
+
+//date to unix timestamp for mysql
+require('../common/date_extend');
 
 const router = express.Router();
 
@@ -12,13 +16,9 @@ router.get('/users', function (req, res, next) {
     // log.debug('%s --- ',JSON.stringify(req.query));
     db.query('select * from t_users limit ?', [limit], function (error, results, fields) {
         
-        if (error) { res.send('ERROR:' + JSON.stringify(error)); return; }
+        if (error) { throw error; }
 
         res.json(results);
-        // res.json({
-        //     results: results,
-        //     fields: fields
-        // });
     });
 
 });
@@ -26,23 +26,22 @@ router.get('/users', function (req, res, next) {
 /* add user. */
 router.post('/users', function (req, res, next) {
     log.debug('user ....');
-    var user = req.json();
+    var user = req.body;
     user.id = uuid.v4();
-    //TODO encrypt password
-    // https://github.com/dcodeIO/bcrypt.js
-    // or 
+    //hash and salt password
+    var salt = crypto.randomBytes(128).toString('base64');
+    var iterations = 10000;
+    hash = crypto.pbkdf2Sync(user.password, salt, iterations, 64, 'sha512').toString('hex');
+    
 
-    // var ecodedpwd = ;
+    var ecodedpwd = null;
     var now = new Date();
-    db.query('insert into t_users values(?,?,?,?)', [user.id,user.name,ecodedpwd,now.getTime()], function (error, results, fields) {
-        
-        if (error) { res.send('ERROR:' + JSON.stringify(error)); return; }
+    db.query('insert into t_users values(?,?,?,?,FROM_UNIXTIME(?),FROM_UNIXTIME(?))', [user.id,user.name,hash,salt.toString('hex'),now.getUnixTime(),null], function (error, results, fields) {
+        if (error) { throw error; }
 
-        res.json(results);
-        // res.json({
-        //     results: results,
-        //     fields: fields
-        // });
+        res.json({
+            id : user.id
+        });
     });
 
 });

@@ -15,6 +15,7 @@ npm run dev
 ```
 
 - unit test
+make sure database installed.
 ```
  npm test
 ```
