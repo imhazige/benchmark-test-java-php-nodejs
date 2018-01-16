@@ -9,7 +9,7 @@ require('../common/date_extend');
 
 const router = express.Router();
 
-/* GET users listing. */
+/* users listing. */
 router.get('/users', function (req, res, next) {
     var limit = req.query.limit;
     limit = parseInt(limit) || 100;
@@ -33,7 +33,7 @@ router.post('/users', function (req, res, next) {
     var salt = crypto.randomBytes(pwdlen);
     salt = salt.toString('hex');
     var iterations = 10000;
-    hash = crypto.pbkdf2Sync(user.password, salt, iterations, pwdlen, 'sha512').toString('hex');
+    var hash = crypto.pbkdf2Sync(user.password, salt, iterations, pwdlen, 'sha512').toString('hex');
 
     var ecodedpwd = null;
     var now = new Date();
@@ -46,5 +46,18 @@ router.post('/users', function (req, res, next) {
     });
 
 });
+
+
+/* get user by id. */
+router.get('/users/:userId', function (req, res, next) {
+    db.query('select * from t_users where id = ?',req.params.userId, function (error, results, fields) {
+        
+        if (error) { throw error; }
+
+        res.json(results);
+    });
+
+});
+
 
 module.exports = router;
