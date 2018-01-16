@@ -29,10 +29,11 @@ router.post('/users', function (req, res, next) {
     var user = req.body;
     user.id = uuid.v4();
     //hash and salt password
-    var salt = crypto.randomBytes(128).toString('base64');
+    const pwdlen = 16;
+    var salt = crypto.randomBytes(pwdlen);
+    salt = salt.toString('hex');
     var iterations = 10000;
-    hash = crypto.pbkdf2Sync(user.password, salt, iterations, 64, 'sha512').toString('hex');
-    
+    hash = crypto.pbkdf2Sync(user.password, salt, iterations, pwdlen, 'sha512').toString('hex');
 
     var ecodedpwd = null;
     var now = new Date();
