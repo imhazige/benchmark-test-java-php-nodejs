@@ -21,7 +21,7 @@ USE `test_db`;
 DROP TABLE IF EXISTS `t_users`;
 CREATE TABLE IF NOT EXISTS `t_users` (
   `id` char(36) DEFAULT NULL,
-  `name` varchar(50) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
   `password` char(32) DEFAULT NULL,
   `salt` char(32) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,

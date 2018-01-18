@@ -1,10 +1,11 @@
 const log = require('../common/log');
-const t = require('./baseTest');
+const t = require('./base-test');
+const uuid = require('uuid');
 
 const prefix = '/t1';
 
 var data = {
-    name: 'Good Name',
+    name: uuid.v1(),
     password: '123456'
 };
 
