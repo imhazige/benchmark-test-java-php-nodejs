@@ -26,6 +26,39 @@ router.get('/users', function (req, res, next) {
 
 });
 
+/* login. */
+router.post('/login', function (req, res, next) {
+    var name = req.body.name;
+    var pwd = req.body.password;
+
+    us.getByName({
+        name: name
+    }, (error, results, fields) => {
+        if (!results){
+            res.end();
+
+            return;
+        }
+
+        
+        var u = results[0];
+
+        var hash = us.md5Password({
+            password:pwd,
+            salt:u.salt
+        });
+        
+        if (hash == u.password){
+            //create token
+
+            res.status(200).send(token);
+        }else{
+            res.status(401);
+        }
+    });
+
+});
+
 /* add user. */
 router.post('/users', function (req, res, next) {
     log.debug('user ....');
