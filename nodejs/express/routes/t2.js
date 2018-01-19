@@ -1,12 +1,40 @@
 const express = require('express');
 const us = require('./user-service');
 const log = require('../common/log');
+const token = require('../common/token');
 
 
 //date to unix timestamp for mysql
 require('../common/date-extend');
 
 const router = express.Router();
+
+router.all('/*',(req, res, next)=>{
+    var path = req.path;
+
+    if (-1 < path.indexOf(`/login`)){
+        next();
+
+        return;
+    }
+
+    var tk = req.get('Authorization');
+
+    if (!tk){
+        res.status(401);
+
+        return;
+    }
+    var tkdata = token.verifyToken(tk);
+
+    if (!tkdata){
+        res.status(401);
+
+        return;
+    }
+
+    
+});
 
 /* users listing. */
 router.get('/users', function (req, res, next) {
@@ -34,25 +62,27 @@ router.post('/login', function (req, res, next) {
     us.getByName({
         name: name
     }, (error, results, fields) => {
-        if (!results){
+        if (!results) {
             res.end();
 
             return;
         }
 
-        
+
         var u = results[0];
 
         var hash = us.md5Password({
-            password:pwd,
-            salt:u.salt
+            password: pwd,
+            salt: u.salt
         });
-        
-        if (hash == u.password){
-            //create token
 
-            res.status(200).send(token);
-        }else{
+        if (hash == u.password) {
+            //create token
+            var tk = token.createToken({
+                userId: userId
+            }, 60 * 60 * 24);
+            res.status(200).send(tk);
+        } else {
             res.status(401);
         }
     });
