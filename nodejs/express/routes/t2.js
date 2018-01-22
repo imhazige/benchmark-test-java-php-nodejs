@@ -33,7 +33,7 @@ router.all('/*',(req, res, next)=>{
         return;
     }
 
-    
+    next();
 });
 
 /* users listing. */
