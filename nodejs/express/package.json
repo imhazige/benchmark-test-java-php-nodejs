@@ -16,6 +16,8 @@
     "jsonwebtoken": "^8.1.0",
     "log4js": "^2.4.1",
     "mysql": "^2.15.0",
+    "passport": "^0.4.0",
+    "passport-http-bearer": "^1.0.1",
     "uuid": "^3.1.0"
   },
   "devDependencies": {
