@@ -21,14 +21,14 @@ router.all('/*',(req, res, next)=>{
     var tk = req.get('Authorization');
 
     if (!tk){
-        res.status(401);
+        res.status(401).send();
 
         return;
     }
     var tkdata = token.verifyToken(tk);
 
     if (!tkdata){
-        res.status(401);
+        res.status(401).send();
 
         return;
     }
@@ -79,7 +79,7 @@ router.post('/login', function (req, res, next) {
         if (hash == u.password) {
             //create token
             var tk = token.createToken({
-                userId: userId
+                userId: u.userId
             }, 60 * 60 * 24);
             res.status(200).send(tk);
         } else {

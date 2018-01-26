@@ -21,7 +21,7 @@ t.test_api('use t1 api add user', function (req, done) {
         .expect(200, done);
 });
 
-t.test_api('test login', function (req, done) {
+t.test_api('test2 login', function (req, done) {
     req.post(prefix + '/login')
         .send(data)
         .expect(res => {
@@ -31,8 +31,10 @@ t.test_api('test login', function (req, done) {
         .expect(200, done);
 });
 
-t.test_api('test add user', function (req, done) {
+t.test_api('test2 add user', function (req, done) {
+    data.name = uuid.v1();
     req.post(prefix + '/users')
+        .set('Authorization', tk)
         .send(data)
         .expect(res => {
             log.debug('response>>' + res.text);
@@ -41,8 +43,9 @@ t.test_api('test add user', function (req, done) {
         .expect(200, done);
 });
 
-t.test_api('test get users', function (req, done) {
+t.test_api('test2 get users', function (req, done) {
     req.get(prefix + '/users')
+        .set('Authorization', tk)
         .expect(res => {
             log.debug('response>>' + res.text)
         })
@@ -50,9 +53,10 @@ t.test_api('test get users', function (req, done) {
 });
 
 
-t.test_api('test get user by id', function (req, done) {
+t.test_api('test2 get user by id', function (req, done) {
     //add a user
     req.get(prefix + '/users/' + data.id)
+        .set('Authorization', tk)
         .expect(res => {
             log.debug('response>>' + res.text)
         })
