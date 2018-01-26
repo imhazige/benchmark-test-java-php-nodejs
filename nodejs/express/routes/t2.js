@@ -18,6 +18,8 @@ router.all('/*',(req, res, next)=>{
         return;
     }
 
+
+    
     var tk = req.get('Authorization');
 
     if (!tk){
