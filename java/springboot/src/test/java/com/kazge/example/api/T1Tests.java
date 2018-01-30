@@ -30,24 +30,12 @@ public class T1Tests {
 	public void getAllTest() {
 		User user = new User();
 		user.setName("test user");
-		String u = this.restTemplate.postForObject("/hello/gusers", user, String.class);
+		String u = this.restTemplate.postForObject("/t1/users", user, String.class);
 		System.out.println(">>>>>>>>>>>>"+u);
-		String body = this.restTemplate.getForObject("/hello/gusers", String.class);
-		System.out.println(">>>>>>>>>>>>"+body);
-		//assertThat(body).isEqualTo("Hello World");
+		
 	}
 
-	@Test
-	public void test2() {
-		String body = this.restTemplate.getForObject("/hello/test2", String.class);
-		System.out.println(">>>>>>>>>>>>"+body);
-		//assertThat(body).isEqualTo("Hello World");
-	}
 
-	@Test
-	public void test3() {
-		String body = this.restTemplate.getForObject("/hello/test3?name=1", String.class);
-		System.out.println(">>>>>>>>>>>>"+body);
-		//assertThat(body).isEqualTo("Hello World");
-	}
+
+
 }
