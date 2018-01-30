@@ -30,4 +30,36 @@ public class UrlUtils {
 
         return uriComponents.toUriString();
     }
+
+    public static String buildQueryString(Map params) {
+        if (null == params || params.isEmpty()) {
+            return null;
+        }
+        StringBuilder sb;
+        try {
+            Iterator it = params.entrySet().iterator();
+            sb = new StringBuilder();
+            while (it.hasNext()) {
+                Entry en = (Entry) it.next();
+                Object key = en.getKey();
+                Object value = en.getValue();
+                if (null == key || null == value) {
+                    continue;
+                }
+                key = URLEncoder.encode(key.toString(), "utf-8");
+                value = URLEncoder.encode(value.toString(), "utf-8");
+                sb.append("&" + key + "=" + value);
+            }
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+
+        String s = sb.toString();
+
+        if (s.startsWith("&")) {
+            s = s.substring(1);
+        }
+
+        return s;
+    }
 }
