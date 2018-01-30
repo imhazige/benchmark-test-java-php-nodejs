@@ -1,4 +1,31 @@
 package com.kazge.example.exception;
 
-public class ApiException  extends  RuntimeException{
+
+import org.springframework.http.HttpStatus;
+
+public class ApiException extends RuntimeException {
+    private int status = HttpStatus.BAD_REQUEST.value();
+    private String message;
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return getMessage();
+    }
 }

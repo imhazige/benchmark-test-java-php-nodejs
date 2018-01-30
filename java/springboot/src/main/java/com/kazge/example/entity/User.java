@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Entity
 // This tells Hibernate to make a table out of this class
-@Table(name="bmkp_saas_users")
+@Table(name="t_users")
 public class User {
     @Id
     private String id;
@@ -18,9 +18,6 @@ public class User {
 
     @Transient //ignore this field
     private String email;
-    
-    @Column(name="tenant_id")
-    private String tenantId;
     
     private String password;
 
@@ -54,14 +51,6 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getTenantId() {
-		return tenantId;
-	}
-
-	public void setTenantId(String tenantId) {
-		this.tenantId = tenantId;
 	}
 
 	public String getPassword() {
