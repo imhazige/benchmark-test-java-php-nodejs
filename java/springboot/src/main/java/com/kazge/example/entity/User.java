@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import java.util.Date;
 
 @Entity
 // This tells Hibernate to make a table out of this class
@@ -21,23 +22,15 @@ public class User {
     @Column(name="tenant_id")
     private String tenantId;
     
-    private boolean sex;
+    private String password;
 
-	public String getTenantId() {
-		return tenantId;
-	}
+	private String salt;
 
-	public void setTenantId(String tenantId) {
-		this.tenantId = tenantId;
-	}
+	@Column(name="create_time")
+	private Date createTime;
 
-	public boolean isSex() {
-		return sex;
-	}
-
-	public void setSex(boolean sex) {
-		this.sex = sex;
-	}
+	@Column(name="update_time")
+	private Date updateTime;
 
 	public String getId() {
 		return id;
@@ -63,5 +56,43 @@ public class User {
 		this.email = email;
 	}
 
+	public String getTenantId() {
+		return tenantId;
+	}
 
+	public void setTenantId(String tenantId) {
+		this.tenantId = tenantId;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 }
