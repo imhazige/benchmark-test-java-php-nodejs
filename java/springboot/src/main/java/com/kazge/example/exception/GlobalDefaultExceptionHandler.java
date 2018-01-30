@@ -1,5 +1,6 @@
 package com.kazge.example.exception;
 
+import com.kazge.example.utils.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -40,7 +41,8 @@ public class GlobalDefaultExceptionHandler {
 
         logger.error("unhandled server exception",e);
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        String errorStack = ExceptionUtils.getStackTraceAsString(e);
 
-        return e;
+        return errorStack;
     }
 }

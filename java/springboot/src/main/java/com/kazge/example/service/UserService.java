@@ -57,4 +57,11 @@ public class UserService {
             throw e;
         }
     }
+
+    public List<User> getAll(Integer limit) {
+        if (null == limit || limit < 1 || limit > 100){
+            limit = 100;
+        }
+        return userRepository.findAllLimit(limit);
+    }
 }
