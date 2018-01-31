@@ -17,8 +17,13 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    BCryptPasswordEncoder passwordEncoder
+
     public User create(User user) {
         validate(user);
+        String[] pwds = encodePassword(user.getPassword());
+        user.setPassword(pwds[0]);
+        user.setSalt(pwds[1]);
         user.setId(UUID.randomUUID().toString());
         user = userRepository.save(user);
         User respUser = new User();
@@ -65,17 +70,33 @@ public class UserService {
         return userRepository.findAllLimit(limit);
     }
 
-    public void delete(String userId) {
+    public User delete(String userId) {
         userRepository.delete(userId);
+
+        User respUser = new User();
+
+        respUser.setId(userId);
+
+        return respUser;
     }
 
     public User get(String userId) {
         return userRepository.findOne(userId);
     }
 
+    public String[] encodePassword(String password) {
+        String salt = "";
+        String encodedPwd = "";
+
+        return new String[]{encodedPwd, salt};
+    }
+
     public User update(User user) {
         validate(user);
 
+        String[] pwds = encodePassword(user.getPassword());
+        user.setPassword(pwds[0]);
+        user.setSalt(pwds[1]);
         userRepository.save(user);
 
         User respUser = new User();
