@@ -3,6 +3,7 @@ package com.kazge.example;
 import com.kazge.example.utils.CollectionUtils;
 import com.kazge.example.utils.JacksonUtils;
 import com.kazge.example.utils.UrlUtils;
+import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,21 +12,20 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
 
-public class BaseTests {
+public abstract class BaseTests {
     public static final Logger logger = LoggerFactory.getLogger(BaseTests.class);
 
     /**
      * you have to use @Autowired, otherwise it will not request to running environment
      */
-    @Autowired
-    private TestRestTemplate restTemplate;
+//    @Autowired
+//    private TestRestTemplate restTemplate;
 
-    public TestRestTemplate getRestTemplate() {
-        return restTemplate;
-    }
+    public abstract TestRestTemplate getRestTemplate();
 
     public ResponseEntity<String> post(String url, Map<String, String> headersArgs, Object entity) {
         return execute(url, HttpMethod.POST, headersArgs, entity);
