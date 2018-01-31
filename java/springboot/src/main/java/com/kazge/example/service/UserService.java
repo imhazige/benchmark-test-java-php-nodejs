@@ -59,9 +59,29 @@ public class UserService {
     }
 
     public List<User> getAll(Integer limit) {
-        if (null == limit || limit < 1 || limit > 100){
+        if (null == limit || limit < 1 || limit > 100) {
             limit = 100;
         }
         return userRepository.findAllLimit(limit);
+    }
+
+    public void delete(String userId) {
+        userRepository.delete(userId);
+    }
+
+    public User get(String userId) {
+        return userRepository.findOne(userId);
+    }
+
+    public User update(User user) {
+        validate(user);
+
+        userRepository.save(user);
+
+        User respUser = new User();
+
+        respUser.setId(user.getId());
+
+        return respUser;
     }
 }

@@ -62,3 +62,22 @@ t.test_api('test2 get user by id', function (req, done) {
         })
         .expect(200, done);
 });
+
+t.test_api('test2 update user', function (req, done) {
+    //update a user
+    req.put(prefix + '/users/' + data.id)
+        .send(data)
+        .expect(res => {
+            log.debug('response>>' + res.text)
+        })
+        .expect(200, done);
+});
+
+t.test_api('test2 delete user', function (req, done) {
+    //add a user
+    req.delete(prefix + '/users/' + data.id)
+        .expect(res => {
+            log.debug('response>>' + res.text)
+        })
+        .expect(200, done);
+});

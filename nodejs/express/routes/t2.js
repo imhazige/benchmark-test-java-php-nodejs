@@ -123,5 +123,41 @@ router.get('/users/:userId', authFilter, function (req, res, next) {
 
 });
 
+/* update user. */
+router.put('/users/:userId', function (req, res, next) {
+    log.debug('user ....');
+    var user = req.body;
+    user.id = req.params.userId;
+
+    us.update({
+        user: user
+    }, function (error, results, fields) {
+        if (error) {
+            throw error;
+        }
+
+        res.json({
+            id: user.id
+        });
+    });
+
+});
+
+/* delete user by id. */
+router.delete('/users/:userId', function (req, res, next) {
+    us.remove({
+        userId: req.params.userId
+    }, function (error, results, fields) {
+        if (error) {
+            throw error;
+        }
+
+        res.json({
+            id: req.params.userId
+        });
+    });
+
+});
+
 
 module.exports = router;

@@ -5,30 +5,26 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.Iterator;
 import java.util.Map;
 
 public class UrlUtils {
-    public static String buildQueryString(String url, Map<Object, Object> params) {
-        MultiValueMap<String, String> p = new LinkedMultiValueMap<String, String>();
-        if (null != params) {
-            for (Map.Entry<Object, Object> entry : params.entrySet()) {
-                if (null == entry.getKey()){
-                    continue;
-                }
-                if (null == entry.getValue()) {
-                    continue;
-                }
-                p.add(entry.getKey().toString(), entry.getValue().toString());
-            }
+
+    public static String appendQueryString(String url, Map params) {
+        if (null == url) {
+            url = "";
         }
 
-        UriComponents uriComponents = UriComponentsBuilder.fromHttpUrl("http://abc.com").queryParams(p).build();
-        String query = uriComponents.getQuery();
-        if (url.indexOf()){
-
+        String query = buildQueryString(params);
+        if (url.indexOf("?") > -1) {
+            query = "&" + query;
+        } else {
+            query = "?" + query;
         }
 
-        return uriComponents.toUriString();
+        return url + query;
     }
 
     public static String buildQueryString(Map params) {
@@ -40,7 +36,7 @@ public class UrlUtils {
             Iterator it = params.entrySet().iterator();
             sb = new StringBuilder();
             while (it.hasNext()) {
-                Entry en = (Entry) it.next();
+                Map.Entry en = (Map.Entry) it.next();
                 Object key = en.getKey();
                 Object value = en.getValue();
                 if (null == key || null == value) {
