@@ -7,6 +7,10 @@ import java.util.List;
 public class InvalidParametersException extends ApiException {
     private List<ErrorDetail> errorDetails;
 
+    public InvalidParametersException(int status, String message) {
+        super(status, message);
+    }
+
     public List<ErrorDetail> getErrorDetails() {
         return errorDetails;
     }

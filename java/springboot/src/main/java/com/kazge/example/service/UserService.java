@@ -2,6 +2,7 @@ package com.kazge.example.service;
 
 
 import com.kazge.example.entity.User;
+import com.kazge.example.exception.ApiException;
 import com.kazge.example.exception.ErrorDetail;
 import com.kazge.example.exception.InvalidParametersException;
 import com.kazge.example.repository.UserRepository;
@@ -10,6 +11,7 @@ import com.kazge.example.utils.PasswordHash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.keygen.KeyGenerators;
 import org.springframework.stereotype.Service;
 
@@ -156,13 +158,17 @@ public class UserService {
     }
 
     public User update(User user) {
+        User fetchedUser = get(user.getId());
+        if (null == fetchedUser){
+            throw new ApiException(HttpStatus.NOT_FOUND.value(),null);
+        }
         validate(user);
 
         String[] pwds = encodePassword(user.getPassword());
-        user.setPassword(pwds[0]);
-        user.setSalt(pwds[1]);
-        user.setUpdateTime(new Date());
-        user.setName(null);
+        fetchedUser.setPassword(pwds[0]);
+        fetchedUser.setSalt(pwds[1]);
+        fetchedUser.setUpdateTime(new Date());
+//        fetchedUser.setName(user.getName());
         userRepository.save(user);
 
         User respUser = new User();

@@ -10,8 +10,9 @@ import java.util.Date;
 // This tells Hibernate to make a table out of this class
 @Table(name="t_users")
 //@SelectBeforeUpdate
-//@DynamicUpdate(true)
+@DynamicUpdate
 public class User {
+
     @Id
     private String id;
 
@@ -24,7 +25,7 @@ public class User {
 
 	private String salt;
 
-	@Column(name="create_time")
+	@Column(name="create_time",nullable = false)
 	private Date createTime;
 
 	@Column(name="update_time")

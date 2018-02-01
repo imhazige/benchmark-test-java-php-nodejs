@@ -7,6 +7,11 @@ public class ApiException extends RuntimeException {
     private int status = HttpStatus.BAD_REQUEST.value();
     private String message;
 
+    public ApiException(int status,String message){
+        this.message = message;
+        this.status = status;
+    }
+
     @Override
     public String getMessage() {
         return message;
