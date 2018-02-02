@@ -8,7 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class BaseNoServerTests extends BaseTests{
+public abstract class BaseNoServerTests extends BaseTests{
 
     @Override
     public TestRestTemplate getRestTemplate() {

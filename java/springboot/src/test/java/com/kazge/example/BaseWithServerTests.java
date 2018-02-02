@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class BaseWithServerTests extends BaseTests{
+public abstract class BaseWithServerTests extends BaseTests{
 
     @Autowired
     TestRestTemplate testRestTemplate;
