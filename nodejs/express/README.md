@@ -3,6 +3,7 @@
 - database - [mysql](https://github.com/mysqljs/mysql)
 - uuid - [uuid](https://github.com/broofa/node-uuid)
 - JWT - [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
+- encryption - nodejs native
 
 - unit test - [mocha](https://mochajs.org/)
 - unit test - [supertest](https://github.com/visionmedia/supertest)
