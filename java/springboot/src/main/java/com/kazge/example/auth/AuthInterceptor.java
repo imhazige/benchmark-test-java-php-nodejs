@@ -24,16 +24,18 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object handler) throws Exception {
-        logger.info("preHandle --- {} ",handler.getClass().getName());
+//        logger.info("preHandle --- {} ",handler.getClass().getName());
         if( handler instanceof HandlerMethod ) {
             // there are cases where this handler isn't an instance of HandlerMethod, so the cast fails.
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             if (handlerMethod.getMethod().isAnnotationPresent(RequireAuth.class)) {
-                return authenticate(httpServletRequest,httpServletResponse);
+                RequireAuth ra = handlerMethod.getMethod().getAnnotation(RequireAuth.class);
+                return !ra.value() || authenticate(httpServletRequest,httpServletResponse);
             }else if (handlerMethod.getBeanType().isAnnotationPresent(RequireAuth.class)){
                 //this also work
 //            }else if (handlerMethod.getMethod().getDeclaringClass().isAnnotationPresent(RequireAuth.class)){
-                return authenticate(httpServletRequest,httpServletResponse);
+                RequireAuth ra = handlerMethod.getBeanType().getAnnotation(RequireAuth.class);
+                return !ra.value() || authenticate(httpServletRequest,httpServletResponse);
             }
 
         }

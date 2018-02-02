@@ -25,6 +25,8 @@ public abstract class BaseTTests extends BaseWithServerTests {
         u.setPassword("123456");
         ResponseEntity<String> response = post(url, buildHeaders(), u);
 
+        Assert.assertEquals(HttpStatus.OK,response.getStatusCode());
+
         User respUSer = JacksonUtils.parse(response.getBody(), User.class);
 
         u.setId(respUSer.getId());
