@@ -8,14 +8,16 @@ import com.kazge.example.exception.InvalidParametersException;
 import com.kazge.example.repository.UserRepository;
 import com.kazge.example.utils.ExceptionUtils;
 import com.kazge.example.utils.PasswordHash;
+import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.keygen.KeyGenerators;
 import org.springframework.stereotype.Service;
 
 import javax.xml.bind.DatatypeConverter;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +25,9 @@ import java.util.UUID;
 
 @Service
 public class UserService {
+    @Value("${jwt.secret}")
+    private String jwtSecrete;
+
     private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     public static final int HASH_WIDTH = 16;
@@ -105,8 +110,10 @@ public class UserService {
      * @return
      */
     public String[] encodePassword(String password) {
-
-        byte[] bytes = KeyGenerators.secureRandom(16).generateKey();
+        SecureRandom random = new SecureRandom();
+        byte[] bytes = new byte[16];
+        random.nextBytes(bytes);
+//        byte[] bytes = KeyGenerators.secureRandom(16).generateKey();
         String salt = DatatypeConverter.printHexBinary(bytes);
         logger.info("salt length is {}", salt.length());
 
@@ -159,8 +166,8 @@ public class UserService {
 
     public User update(User user) {
         User fetchedUser = get(user.getId());
-        if (null == fetchedUser){
-            throw new ApiException(HttpStatus.NOT_FOUND.value(),null);
+        if (null == fetchedUser) {
+            throw new ApiException(HttpStatus.NOT_FOUND.value(), null);
         }
         validate(user);
 
@@ -175,5 +182,32 @@ public class UserService {
         respUser.setId(user.getId());
 
         return respUser;
+    }
+
+    public String createToken(User user) {
+        Date expiresAt = new Date(System.currentTimeMillis() + (60 * 60 * 24 * 1000));
+        return Jwts.builder()
+                .setSubject(user.getId())
+                .setExpiration(expiresAt)
+                .signWith(SignatureAlgorithm.HS512, jwtSecrete).compact();
+    }
+
+    public String verifyToken(String token) {
+        try {
+            Jws<Claims> jws = Jwts.parser().setSigningKey(jwtSecrete).parseClaimsJws(token);
+            final String userId = jws.getBody().getSubject();
+
+            return userId;
+        } catch (ExpiredJwtException e) {
+            return null;
+        } catch (UnsupportedJwtException e) {
+            return null;
+        } catch (MalformedJwtException e) {
+            return null;
+        } catch (SignatureException e) {
+            return null;
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 }

@@ -21,8 +21,8 @@ t.test_api('use t1 api add user', function (req, done) {
         .expect(200, done);
 });
 
-t.test_api('test2 login', function (req, done) {
-    req.post(prefix + '/login')
+t.test_api('test2 token', function (req, done) {
+    req.post(prefix + '/token')
         .send(data)
         .expect(res => {
             log.debug('response>>' + res.text);

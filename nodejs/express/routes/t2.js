@@ -51,7 +51,7 @@ router.get('/users', authFilter, function (req, res, next) {
 });
 
 /* login. */
-router.post('/login', function (req, res, next) {
+router.post('/token', function (req, res, next) {
     var name = req.body.name;
     var pwd = req.body.password;
 
