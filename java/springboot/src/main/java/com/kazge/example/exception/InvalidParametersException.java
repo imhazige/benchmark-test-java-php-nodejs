@@ -1,14 +1,15 @@
 package com.kazge.example.exception;
 
 import com.kazge.example.utils.JacksonUtils;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
 public class InvalidParametersException extends ApiException {
     private List<ErrorDetail> errorDetails;
 
-    public InvalidParametersException(int status, String message) {
-        super(status, message);
+    public InvalidParametersException() {
+        super(HttpStatus.BAD_REQUEST.value(), "");
     }
 
     public List<ErrorDetail> getErrorDetails() {

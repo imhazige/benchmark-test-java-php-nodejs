@@ -121,7 +121,7 @@ public class UserService {
 
 //        logger.info("first hash length is {}", password.length());
 
-        //the macth the argithem other solutionuseS
+        //the match the algorithm other solution
         //spring way did not produced the same way
 //        Pbkdf2PasswordEncoder encoder = new Pbkdf2PasswordEncoder(salt, 10000, 16);
 //        String encodedPwd = encoder.encode(password);
@@ -168,8 +168,7 @@ public class UserService {
         fetchedUser.setPassword(pwds[0]);
         fetchedUser.setSalt(pwds[1]);
         fetchedUser.setUpdateTime(new Date());
-//        fetchedUser.setName(user.getName());
-        userRepository.save(user);
+        userRepository.save(fetchedUser);
 
         User respUser = new User();
 
