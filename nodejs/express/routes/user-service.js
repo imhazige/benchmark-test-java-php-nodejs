@@ -13,6 +13,7 @@ const listing = (ops, callback) => {
 
 const md5Password = (ops) => {
     var iterations = 10000;
+    log.debug("ops",ops);
     var hash = crypto.pbkdf2Sync(ops.password, ops.salt, iterations, pwdlen, 'sha512').toString('hex');
 
     return hash;
