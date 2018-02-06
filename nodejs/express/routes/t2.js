@@ -42,7 +42,8 @@ router.get('/users', authFilter, function (req, res, next) {
     }, function (error, results, fields) {
 
         if (error) {
-            throw error;
+            log.error(error);
+            res.status(500).end();
         }
 
         res.json(results);

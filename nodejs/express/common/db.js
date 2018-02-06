@@ -1,24 +1,28 @@
 const log = require('./log');
 const mysql = require('mysql');
 
+var pool = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: 'root',
+    database: 'test_db'
+});
+
 function query(sql, args, callback) {
-    var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: 'root',
-        database: 'test_db'
+    pool.getConnection(function (err, connection) {
+        if (err) {
+            callback(error, null, null);
+
+            return;
+        }
+        var q = connection.query(sql, args, function (error, results, fields) {
+            connection.release();
+            callback(error, results, fields);
+        });
+        log.debug(`SQL:${q.sql}`);
     });
-
-    connection.connect();
-
-    var q = connection.query(sql, args, function (error, results, fields) {
-        callback(error,results,fields);        
-    });
-    log.debug(`SQL:${q.sql}`);
-
-    connection.end();
 }
 
 module.exports = {
-    query:query
+    query: query
 };
