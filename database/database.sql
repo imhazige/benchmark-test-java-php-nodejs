@@ -28,7 +28,13 @@ CREATE TABLE IF NOT EXISTS `t_users` (
   `update_time` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 数据导出被取消选择。
+-- 正在导出表  test_db.t_users 的数据：~0 rows (大约)
+DELETE FROM `t_users`;
+/*!40000 ALTER TABLE `t_users` DISABLE KEYS */;
+INSERT INTO `t_users` (`id`, `name`, `password`, `salt`, `create_time`, `update_time`) VALUES
+	('4d62ccdc-be00-42cd-bd57-b01fb97ae2f2', 'test', '053b184ec38f906940640b9a8d2873e8', '18132ab245e49b6daa961599abe91414', '2018-02-06 15:50:31', NULL);
+/*!40000 ALTER TABLE `t_users` ENABLE KEYS */;
+
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

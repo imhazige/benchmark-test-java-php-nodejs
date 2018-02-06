@@ -673,3 +673,17 @@ timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success
 1517896288591,7,t1-create,400,Bad Request,load-10 1-1,text,false,Test failed: code expected to match /200/,1386,458,1,1,7,0,3
 1517896305023,4,t1-create,400,Bad Request,load-10 1-1,text,false,Test failed: code expected to match /200/,1386,458,1,1,4,0,1
 1517896381455,185,t1-create,200,OK,load-10 1-1,text,true,,257,462,1,1,185,0,4
+1517903395066,2032,t1-create,Non HTTP response code: java.net.ConnectException,Non HTTP response message: Connection refused: connect,load-10 1-1,text,false,Test failed: code expected to match /200/,2131,0,1,1,0,0,2032
+1517903431705,287,t1-create,200,OK,load-10 1-1,text,true,,257,399,1,1,287,0,19
+1517903583952,48,t1-create,200,OK,load-10 1-1,text,true,,257,462,1,1,48,0,5
+1517903628042,5294,t2-login,Non HTTP response code: java.net.SocketException,Non HTTP response message: Connection reset,load-10 1-1,text,false,Test failed: code expected to match /200/,2560,0,1,1,0,0,3
+1517903658895,2001,t2-login,Non HTTP response code: java.net.ConnectException,Non HTTP response message: Connection refused: connect,load-10 1-1,text,false,Test failed: code expected to match /200/,2131,0,1,1,0,0,2001
+1517903715271,298,t2-login,200,OK,load-10 1-1,text,true,,410,399,1,1,298,0,2
+1517903833633,60,t1-create,200,OK,load-10 1-1,text,true,,257,462,1,1,60,0,1
+1517903833694,11,t1-list,200,OK,load-10 1-1,text,true,,903,354,1,1,11,0,0
+1517903833705,3,t2-create,401,Unauthorized,load-10 1-1,,false,Test failed: code expected to match /200/,132,462,1,1,3,0,0
+1517903833709,2,t1-list,401,Unauthorized,load-10 1-1,,false,Test failed: code expected to match /200/,132,354,1,1,2,0,0
+1517903951899,52,t1-create,200,OK,load-10 1-1,text,true,,257,683,1,1,52,0,5
+1517903951951,10,t1-list,200,OK,load-10 1-1,text,true,,1143,575,1,1,10,0,0
+1517903951962,49,t2-create,200,OK,load-10 1-1,text,true,,257,683,1,1,49,0,0
+1517903952012,10,t1-list,200,OK,load-10 1-1,text,true,,1384,575,1,1,10,0,0

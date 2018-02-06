@@ -7,16 +7,6 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Start",
-            "runtimeExecutable": "npm",
-            "runtimeArgs": [
-                "start"
-            ],
-            "port": 9229
-        },
-        {
-            "type": "node",
-            "request": "launch",
             "name": "Debug-Dev",
             "runtimeExecutable": "npm",
             "runtimeArgs": [
