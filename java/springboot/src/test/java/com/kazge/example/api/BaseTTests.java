@@ -16,6 +16,13 @@ public abstract class BaseTTests extends BaseWithServerTests {
 
     abstract Map<String, String> buildHeaders();
 
+    public String doGetToken(User u) {
+        ResponseEntity<String> response = post("/t2/token", null, u);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        return response.getBody();
+    }
+
     public User doCreate(String url) {
         if (null == url) {
             url = getBaseUrl();

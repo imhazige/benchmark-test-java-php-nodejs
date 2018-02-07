@@ -12,9 +12,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/t2/users")
 public class T2UserController extends AbstractUserController {
-    @PostMapping("/token")
-    @RequireAuth(false)
-    public String createToken(@RequestBody User user) {
-        return userService.createToken(user);
-    }
+
 }

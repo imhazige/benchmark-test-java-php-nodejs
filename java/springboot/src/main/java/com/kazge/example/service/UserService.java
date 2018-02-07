@@ -193,9 +193,9 @@ public class UserService {
         if (!logined){
             throw new ApiException(HttpStatus.UNAUTHORIZED.value(),"invalid username or password.");
         }
-        Date expiresAt = new Date(System.currentTimeMillis() + (100 * 365 * 24 * 60 * 60 * 1000));
+        Date expiresAt = new Date(System.currentTimeMillis() + (24 * 60 * 60 * 1000));
         return Jwts.builder()
-                .setSubject(user.getId())
+                .setSubject(u.getId())
                 .setExpiration(expiresAt)
                 .signWith(SignatureAlgorithm.HS512, jwtSecrete).compact();
     }

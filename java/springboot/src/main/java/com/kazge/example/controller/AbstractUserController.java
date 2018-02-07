@@ -18,7 +18,7 @@ public abstract class AbstractUserController {
     }
 
     @GetMapping
-    public List<User> getAll(@RequestParam("limit") Integer limit) {
+    public List<User> getAll(@RequestParam(value = "limit",required = false) Integer limit) {
         return userService.getAll(limit);
     }
 

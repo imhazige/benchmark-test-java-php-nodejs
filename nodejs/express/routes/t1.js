@@ -28,8 +28,8 @@ router.get('/users', function (req, res, next) {
 
 /* add user. */
 router.post('/users', function (req, res, next) {
-    log.debug('user ....');
     var user = req.body;
+    log.debug('user ....',user);
 
     us.add({
         user: user

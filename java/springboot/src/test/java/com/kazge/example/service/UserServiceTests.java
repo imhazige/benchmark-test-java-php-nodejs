@@ -2,9 +2,12 @@ package com.kazge.example.service;
 
 
 import com.kazge.example.BaseNoServerTests;
+import com.kazge.example.entity.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.UUID;
 
 public class UserServiceTests extends BaseNoServerTests {
 

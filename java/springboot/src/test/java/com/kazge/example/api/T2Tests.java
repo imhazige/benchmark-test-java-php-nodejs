@@ -19,11 +19,9 @@ public class T2Tests extends BaseTTests {
         return "/t2/users";
     }
 
-    public String doGetToken(User u) {
-        ResponseEntity<String> response = post(getBaseUrl() + "/token", null, u);
-        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
-
-        return response.getBody();
+    @Test
+    public void testGetTestUserToken(){
+        doGetToken();
     }
 
 
