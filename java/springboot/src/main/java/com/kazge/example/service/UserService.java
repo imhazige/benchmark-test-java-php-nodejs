@@ -185,7 +185,7 @@ public class UserService {
     }
 
     public String createToken(User user) {
-        User u = userRepository.findOne(user.getId());
+        User u = userRepository.getByname(user.getName());
         if (null == u){
             throw new ApiException(HttpStatus.NOT_FOUND.value(),null);
         }
@@ -193,7 +193,7 @@ public class UserService {
         if (!logined){
             throw new ApiException(HttpStatus.UNAUTHORIZED.value(),"invalid username or password.");
         }
-        Date expiresAt = new Date(System.currentTimeMillis() + (60 * 60 * 24 * 1000));
+        Date expiresAt = new Date(System.currentTimeMillis() + (100 * 365 * 24 * 60 * 60 * 1000));
         return Jwts.builder()
                 .setSubject(user.getId())
                 .setExpiration(expiresAt)

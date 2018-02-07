@@ -30,12 +30,20 @@ public class AuthInterceptor implements HandlerInterceptor {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             if (handlerMethod.getMethod().isAnnotationPresent(RequireAuth.class)) {
                 RequireAuth ra = handlerMethod.getMethod().getAnnotation(RequireAuth.class);
-                return !ra.value() || authenticate(httpServletRequest,httpServletResponse);
+                if (!ra.value()){
+                    return true;
+                } 
+                
+                return authenticate(httpServletRequest,httpServletResponse);
             }else if (handlerMethod.getBeanType().isAnnotationPresent(RequireAuth.class)){
                 //this also work
 //            }else if (handlerMethod.getMethod().getDeclaringClass().isAnnotationPresent(RequireAuth.class)){
                 RequireAuth ra = handlerMethod.getBeanType().getAnnotation(RequireAuth.class);
-                return !ra.value() || authenticate(httpServletRequest,httpServletResponse);
+                if (!ra.value()){
+                    return true;
+                } 
+                
+                return authenticate(httpServletRequest,httpServletResponse);
             }
 
         }
@@ -52,6 +60,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         //JWT token verify
         String userId =  userService.verifyToken(authHeader);
         if (null == userId){
+            httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
             return false;
         }
 
