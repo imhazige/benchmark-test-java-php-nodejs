@@ -5,3 +5,6 @@ nodejs/express/node_modules/
 java/springboot/target/
 java/springboot/.settings/
 java/springboot/.sts4-cache/
+test/resports/summary.xml
+test/resports/responsetime.xml
+test/resports/aggregate.xml
