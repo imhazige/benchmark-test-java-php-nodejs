@@ -8,3 +8,4 @@ java/springboot/.sts4-cache/
 test/resports/summary.xml
 test/resports/responsetime.xml
 test/resports/aggregate.xml
+python/django/app/db.sqlite3

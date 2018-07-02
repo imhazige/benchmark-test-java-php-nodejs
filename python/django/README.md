@@ -1,6 +1,7 @@
-## install
-### install python3
-### install django
+## Install
+### Install python3
+### Install django
 `sudo pip install Django`
-## run
+## Run
+go to app folder, run command
 `python manage.py runserver`
