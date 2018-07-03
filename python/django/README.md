@@ -1,7 +1,19 @@
-## Note:
-For windows, the `sudo` command is installed via [scoop](https://scoop.sh/)
+### Libray used:
+- restapi - [django-rest-framework](https://github.com/encode/django-rest-framework)
+- logging - django
+- database - django
+- uuid - 
+- JWT - 
+- encryption - 
+
+- unit test - 
+- unit test - 
+
 
 ## Install
+>**Note:**
+>For windows, the `sudo` command is installed via [scoop](https://scoop.sh/)
+
 ### Install python3
 
 ## Install mysql connector
