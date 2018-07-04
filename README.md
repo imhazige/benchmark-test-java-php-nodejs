@@ -29,7 +29,7 @@ Database is using Mysql.
 ### Schema
 
 ## Java
- - [springboot](http://projects.spring.io/spring-boot/)
+ - [springboot](http://projects.spring.io/spring-boot/) - [project](./java/springboot)
  - [play-scala](https://playframework.com/) 
  - [kotlin](https://kotlinlang.org/)
 
@@ -38,8 +38,12 @@ Database is using Mysql.
 - [symphony](https://symphony.com/)
 
 ## Node.js
-- [express](http://expressjs.com/)
+- [express](http://expressjs.com/) - [project](./nodejs/express)
 - [koa](http://koajs.com/)
+
+## Python
+- [Django](https://www.djangoproject.com/) - [project](./python/django)
+- [nameko](https://nameko.readthedocs.io/)
 
 
 
