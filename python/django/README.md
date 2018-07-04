@@ -11,8 +11,13 @@
 
 
 ## Install
->**Note:**
+>**Note:**  
+
 >For windows, the `sudo` command is installed via [scoop](https://scoop.sh/)
+
+> To let VSCode recognize the pipenv context, see [here](https://blog.kazge.com/python/2018/07/03/the-python-dependency-tool/)
+
+> Do not use migrate, instead, install the database from the sql  
 
 ### Install python3
 
@@ -31,7 +36,10 @@ go to app folder, run command
 
 ## Setup project
 - initialize dependencies `pipenv install`  
-- load venv `pipenv shell`
-- django migrate `python manage.py migrate`
+- load venv `pipenv shell`   
+- ~~django migrate `python manage.py makemigrations` `python manage.py migrate`~~
 - start dev server `python manage.py runserver`
+
+## Test
+ `python manage.py test common`
 

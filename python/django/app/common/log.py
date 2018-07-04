@@ -7,7 +7,7 @@ the format is using str.format see https://docs.python.org/3/library/stdtypes.ht
 import logging
 
 # Get an instance of a logger
-logger = logging.getLogger('django')
+logger = logging.getLogger('app')
 
 
 def debug(msg, *args, **kwargs):

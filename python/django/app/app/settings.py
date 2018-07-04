@@ -31,8 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'common.apps.CommonConfig',
     'rest_framework',
-    'polls.apps.PollsConfig',
+    # 'polls.apps.PollsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -152,6 +153,13 @@ LOGGING = {
     },
     'loggers': {
         'django': {
+            'handlers': ['console'],
+            # 'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+            'level': 'INFO',
+            'propagate': True,
+            'formatter': 'verbose'
+        },
+        'app': {
             'handlers': ['console'],
             # 'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
             'level': 'DEBUG',
