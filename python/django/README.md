@@ -42,4 +42,5 @@ go to app folder, run command
 
 ## Test
  `python manage.py test common`
+ it will create a temp database based on the database setting for test
 

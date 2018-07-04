@@ -8,12 +8,30 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 from .models import TUSers
+import uuid
+from . import log
+from datetime import datetime
 
 
 class T1Tests(APITestCase):
     base_name = 't1'
 
+    def create_one(self, **kwargs):
+        id = kwargs.get('id')
+        if id is None:
+            id = str(uuid.uuid1())
+        if kwargs.get('name') is None:
+            kwargs['name'] = id
+
+        now = datetime.now()
+        kwargs['create_time'] = now
+        kwargs['update_time'] = now
+        log.debug('---', kwargs)
+
+        return TUSers.objects.create(**kwargs)
+
     def set_up(self):
+        # this is not required, it will create a temp database when testing
         TUSers.objects.all().delete()
 
     def test_list(self):
@@ -26,4 +44,19 @@ class T1Tests(APITestCase):
         response = self.client.get(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(TUSers.objects.count(), 0)
+        # self.assertEqual(TUsers.objects.get().name, 'DabApps')
+
+    def test_retrieve(self):
+        """
+        retrieve
+        """
+        # get the url
+        u = self.create_one()
+        log.debug('created {}', u)
+        url = reverse(T1Tests.base_name + '-detail', args=(u.id,))
+        log.debug('url is {}', url)
+        data = {}
+        response = self.client.get(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(TUSers.objects.count(), 1)
         # self.assertEqual(TUsers.objects.get().name, 'DabApps')
