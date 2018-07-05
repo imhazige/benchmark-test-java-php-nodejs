@@ -41,6 +41,8 @@ go to app folder, run command
 - start dev server `python manage.py runserver`
 
 ## Test
- `python manage.py test common`
+ `python manage.py test common` or `python -m unittest common`
  it will create a temp database based on the database setting for test
+
+ `python manage.py test common.utils_tests` test one file only
 

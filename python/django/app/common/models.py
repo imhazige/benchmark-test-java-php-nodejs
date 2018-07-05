@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+from . import django_utils
 
 
 class TUSers(models.Model):
@@ -13,6 +14,9 @@ class TUSers(models.Model):
     password = models.CharField(max_length=32)
     create_time = models.DateTimeField()
     update_time = models.DateTimeField()
+
+    def __str__(self):
+        return django_utils.obj2json(self)
 
     class Meta:
         # override the default table name

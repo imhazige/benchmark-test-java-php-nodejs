@@ -11,6 +11,7 @@ from .models import TUSers
 import uuid
 from . import log
 from datetime import datetime
+from django.utils import timezone
 
 
 class T1Tests(APITestCase):
@@ -20,15 +21,16 @@ class T1Tests(APITestCase):
         id = kwargs.get('id')
         if id is None:
             id = str(uuid.uuid1())
+            kwargs['id'] = id
         if kwargs.get('name') is None:
             kwargs['name'] = id
 
-        now = datetime.now()
+        now = datetime.now(tz=timezone.utc)
         kwargs['create_time'] = now
         kwargs['update_time'] = now
-        log.debug('---', kwargs)
 
-        return TUSers.objects.create(**kwargs)
+        u = TUSers.objects.create(**kwargs)
+        return u
 
     def set_up(self):
         # this is not required, it will create a temp database when testing
