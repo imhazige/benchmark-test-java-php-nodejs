@@ -62,3 +62,18 @@ class T1Tests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(TUSers.objects.count(), 1)
         # self.assertEqual(TUsers.objects.get().name, 'DabApps')
+
+    def test_createAndUpdate(self):
+        """
+        retrieve
+        """
+        # get the url
+        u = self.create_one()
+        log.debug('created {}', u)
+        url = reverse(T1Tests.base_name + '-create', args=(u.id,))
+        log.debug('url is {}', url)
+        data = {}
+        response = self.client.get(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(TUSers.objects.count(), 1)
+        # self.assertEqual(TUsers.objects.get().name, 'DabApps')
