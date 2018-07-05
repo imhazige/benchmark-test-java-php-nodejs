@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from rest_framework import viewsets
+from rest_framework import status
 
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -9,6 +10,8 @@ from rest_framework.response import Response
 from common.models import TUSers
 from common.serializer import TUSersSerializer
 from . import log
+import json
+import uuid
 
 
 class T1ViewSet(viewsets.ModelViewSet):
@@ -23,6 +26,32 @@ class T1ViewSet(viewsets.ModelViewSet):
     # def get_one(self, request, *args, **kwargs):
     #     snippet = self.get_object()
     #     return Response(snippet.highlighted)
+
+    def create_(self, request):
+        log.debug('-----------------create')
+        # super(T1ViewSet, self).create(request)
+
+        # TODO:set id, date
+        serializer = TUSersSerializer(data=request.data)
+        # When a serializer is passed a `data` keyword argument you must call `.is_valid()` before attempting to access the serialized `.data` representation
+        valid = serializer.is_valid(raise_exception=False)
+        if not valid:
+            log.debug('valid {}', serializer.errors)
+            return Response(json.dumps(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
+        # TODO:do not use serializer.save(), it have validation
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def create(self, request):
+        log.debug('-----------------create')
+        # super(T1ViewSet, self).create(request)
+
+        # TODO:set salt
+        u = request.data
+        # u['salt'] = ?
+        u = TUSers.objects.create(**u)
+        serializer = TUSersSerializer(u)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def update(self, request, pk=None):
         '''

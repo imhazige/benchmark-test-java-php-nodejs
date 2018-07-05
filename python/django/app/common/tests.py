@@ -32,6 +32,12 @@ class T1Tests(APITestCase):
         u = TUSers.objects.create(**kwargs)
         return u
 
+    def setone(self):
+        id = str(uuid.uuid1())
+        now = datetime.now(tz=timezone.utc)
+        # :fit the test case
+        return {'id': id, 'name': id, 'password': '123456', 'create_time': now, 'update_time': now}
+
     def set_up(self):
         # this is not required, it will create a temp database when testing
         TUSers.objects.all().delete()
@@ -70,10 +76,10 @@ class T1Tests(APITestCase):
         # get the url
         u = self.create_one()
         log.debug('created {}', u)
-        url = reverse(T1Tests.base_name + '-create', args=(u.id,))
+        url = reverse(T1Tests.base_name + '-list')
         log.debug('url is {}', url)
-        data = {}
-        response = self.client.get(url, data, format='json')
+        data = self.setone()
+        response = self.client.post(url, data, format='json')
+        # :get response body
+        log.debug('response:{}', response.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(TUSers.objects.count(), 1)
-        # self.assertEqual(TUsers.objects.get().name, 'DabApps')
