@@ -1,0 +1,25 @@
+{
+  "name": "my",
+  "private": true,
+  "scripts": {
+    "start": "meteor run",
+    "test": "meteor test --once --driver-package meteortesting:mocha",
+    "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
+    "visualize": "meteor --production --extra-packages bundle-visualizer"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.51",
+    "jsonwebtoken": "^8.3.0",
+    "log4js": "^3.0.0",
+    "meteor-node-stubs": "^0.4.1",
+    "mysql": "^2.16.0",
+    "uuid": "^3.3.2"
+  },
+  "meteor": {
+    "mainModule": {
+      "client": "client/main.js",
+      "server": "server/main.js"
+    },
+    "testModule": "tests/main.js"
+  }
+}
