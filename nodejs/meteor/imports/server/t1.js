@@ -1,5 +1,4 @@
 import service from './user-service';
-import { Restivus } from 'nimble:restivus';
 
 const Api = new Restivus({
   apiPath: 't1/users'

@@ -39,6 +39,7 @@ Database is using Mysql.
 
 ## Node.js
 - [express](http://expressjs.com/) - [project](./nodejs/express)
+- [meteor](https://github.com/meteor/meteor) - [project](./nodejs/meteor)
 - [koa](http://koajs.com/)
 
 ## Python
