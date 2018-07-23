@@ -1,14 +1,37 @@
 const express = require('express');
 const us = require('./user-service');
 const log = require('./common/log');
+const token = require('./common/token');
 
 //date to unix timestamp for mysql
 require('./common/date-extend');
 
 const router = express.Router();
 
+const authFilter = (req, res, next) => {
+  var tk = req.get('Authorization');
+
+  if (!tk) {
+    res.status(401).send();
+
+    return;
+  }
+  var tkdata = token.verifyToken(tk);
+
+  if (!tkdata) {
+    res.status(401).send();
+
+    return;
+  }
+
+  req.tkdata = tkdata;
+
+  next();
+};
+
 /* users listing. */
-router.get('/users', function(req, res, next) {
+router.get('/users', authFilter, function(req, res, next) {
+  log.debug('auth data is ', req.tkdata);
   var limit = req.query.limit;
   limit = parseInt(limit) || 100;
   // log.debug('%s --- ',JSON.stringify(req.query));
@@ -18,7 +41,8 @@ router.get('/users', function(req, res, next) {
     },
     function(error, results, fields) {
       if (error) {
-        throw error;
+        log.error(error);
+        res.status(500).end();
       }
 
       res.json(results);
@@ -26,10 +50,50 @@ router.get('/users', function(req, res, next) {
   );
 });
 
+/* login. */
+router.post('/token', function(req, res, next) {
+  var name = req.body.name;
+  var pwd = req.body.password;
+
+  us.getByName(
+    {
+      name: name
+    },
+    (error, results, fields) => {
+      if (!results) {
+        res.end();
+
+        return;
+      }
+
+      var u = results[0];
+
+      var hash = us.md5Password({
+        password: pwd,
+        salt: u.salt
+      });
+
+      var tokData = {
+        userId: u.id
+      };
+
+      log.debug('tk data is ', tokData);
+
+      if (hash == u.password) {
+        //create token
+        var tk = token.createToken(tokData, 60 * 60 * 24);
+        res.status(200).send(tk);
+      } else {
+        res.status(401);
+      }
+    }
+  );
+});
+
 /* add user. */
-router.post('/users', function(req, res, next) {
+router.post('/users', authFilter, function(req, res, next) {
+  log.debug('user ....');
   var user = req.body;
-  log.debug('user ....', user);
 
   us.add(
     {
@@ -48,7 +112,7 @@ router.post('/users', function(req, res, next) {
 });
 
 /* get user by id. */
-router.get('/users/:userId', function(req, res, next) {
+router.get('/users/:userId', authFilter, function(req, res, next) {
   us.get(
     {
       userId: req.params.userId

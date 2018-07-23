@@ -25,7 +25,7 @@ meteor npm start
 - unit test
 make sure database installed.
 ```
- npm test
+meteor test --full-app --driver-package meteortesting:mocha
 ```
 
 
