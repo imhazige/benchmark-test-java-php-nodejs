@@ -4,8 +4,8 @@
   "scripts": {
     "start": "meteor run",
     "test": "mocha",
+    "test-app": "cross-env TEST_BROWSER_DRIVER=nightmare meteor test --full-app --once --driver-package meteortesting:mocha",
     "test-meteor": "meteor test --once --driver-package meteortesting:mocha",
-    "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
     "visualize": "meteor --production --extra-packages bundle-visualizer"
   },
   "dependencies": {
@@ -23,13 +23,12 @@
       "client": "client/main.js",
       "server": "server/main.js"
     },
-    "testModule": {
-      "client": "tests/client/main.js",
-      "server": "tests/server/main.js"
-    }
+    "__testModule": "tests/main.js"
   },
   "devDependencies": {
+    "cross-env": "^5.2.0",
     "mocha": "^5.2.0",
+    "nightmare": "^3.0.1",
     "supertest": "^3.1.0"
   }
 }
