@@ -5,16 +5,21 @@ Here I use official suggested library [nimble:restivus](https://atmospherejs.com
 Refer to <https://guide.meteor.com/routing.html#server-side>
 
 ### Libray used:
-- logging - log4js
-- database - 
-- uuid - 
-- JWT - 
+- logging - [log4js](https://github.com/log4js-node/log4js-node)
+- database - [mysql](https://github.com/mysqljs/mysql)
+- uuid - [uuid](https://github.com/broofa/node-uuid)
+- JWT - [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)
 - encryption - nodejs native
 
-- unit test - mocha
-- unit test - meteor
+- unit test - [mocha](https://mochajs.org/)
+- unit test - [supertest](https://github.com/visionmedia/supertest)
 
-### build on localmachine
+### run development
+install meteor
+run command
+`meteor npm start`
+
+### build on local machine
 `npm install --production`
 `meteor build ./build`
 
