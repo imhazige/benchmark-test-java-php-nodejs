@@ -5,14 +5,30 @@ Here I use official suggested library [nimble:restivus](https://atmospherejs.com
 Refer to <https://guide.meteor.com/routing.html#server-side>
 
 ### Libray used:
-- logging - 
+- logging - log4js
 - database - 
 - uuid - 
 - JWT - 
 - encryption - nodejs native
 
-- unit test - 
-- unit test - 
+- unit test - mocha
+- unit test - meteor
+
+### build on localmachine
+`npm install --production`
+`meteor build ./build`
+
+### run build
+first make sure you have mongodb installed, created a database like meteor_test
+extract the built package to a folder
+`cd <path-to-build-extracted-folder>/bundle/program/server`
+`npm install`
+`cd <path-to-build-extracted-folder>/bundle` -- goback to the bundle root folder
+`bash`
+`PORT=8080 MONGO_URL=mongodb://localhost:27017/meteor-test ROOT_URL=http://localhost:8080 node main.js`
+
+(cd programs/server && npm install)
+MONGO_URL=mongodb://localhost:27017/myapp ROOT_URL=http://my-app.com node main.js
 
 
 

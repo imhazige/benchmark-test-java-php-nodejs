@@ -9,3 +9,4 @@ test/resports/summary.xml
 test/resports/responsetime.xml
 test/resports/aggregate.xml
 python/django/app/db.sqlite3
+nodejs/meteor/build/
