@@ -4,7 +4,7 @@
 - database - django
 - uuid - 
 - JWT - 
-- encryption - 
+- encryption - pbkdf2_sha256
 
 - unit test - 
 - unit test - 

@@ -38,7 +38,6 @@ class T1ViewSet(viewsets.ModelViewSet):
         if not valid:
             log.debug('valid {}', serializer.errors)
             return Response(json.dumps(serializer.errors), status=status.HTTP_400_BAD_REQUEST)
-        # TODO:do not use serializer.save(), it have validation
         serializer.save()
         return Response(serializer.data, status=status.HTTP_200_OK)
 

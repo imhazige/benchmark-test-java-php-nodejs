@@ -24,7 +24,7 @@ class T2TokenViewSet(viewsets.ModelViewSet):
         # TODO:check user
 
         # TODO: create token
-        return Response(snippet.highlighted)
+        return Response('')
 
 
 class T2ViewSet(viewsets.ModelViewSet):
@@ -36,8 +36,8 @@ class T2ViewSet(viewsets.ModelViewSet):
     serializer_class = TUSersSerializer
 
     # https://www.django-rest-framework.org/api-guide/authentication/#how-authentication-is-determined
-    authentication_classes = (MyJWTAuthentication)
-    permission_classes = (MyIsAuthenticated)
+    # authentication_classes = (MyJWTAuthentication)
+    # permission_classes = (MyIsAuthenticated)
 
     def create_(self, request):
         log.debug('-----------------create')
