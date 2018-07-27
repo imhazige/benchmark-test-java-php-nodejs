@@ -46,9 +46,7 @@ class T1ViewSet(viewsets.ModelViewSet):
         log.debug('-----------------create')
         # super(T1ViewSet, self).create(request)
 
-        # TODO:set salt
         u = request.data
-        # u['salt'] = ?
         u = TUSers.objects.create(**u)
         serializer = TUSersSerializer(u)
         return Response(serializer.data, status=status.HTTP_200_OK)

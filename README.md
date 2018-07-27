@@ -17,7 +17,7 @@ Each solution will use the popular library, framework adopted in the specified l
 #### GET /t1/users/<id> -- get a user
 
 ### Test 2 with token autentication
-#### POST /t2/login -- create token
+#### POST /t2/token -- create token
 #### POST /t2/users -- create a User
 #### GET /t2/users -- get list of users
 #### GET /t2/users/<id> -- get a user

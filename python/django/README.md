@@ -26,9 +26,12 @@ Download [mysql connctor](https://dev.mysql.com/downloads/connector/c/)
 
 See [The Python Dependency Tool](https://blog.kazge.com/python/2018/07/03/the-python-dependency-tool/)
 
-## Run
+## Run development
 go to app folder, run command
-`python manage.py runserver`
+`python manage.py runserver 8080`
+
+
+## Run production
 
 
 ## Install [pipenv](https://github.com/pypa/pipenv)
@@ -38,11 +41,11 @@ go to app folder, run command
 - initialize dependencies `pipenv install`  
 - load venv `pipenv shell`   
 - ~~django migrate `python manage.py makemigrations` `python manage.py migrate`~~
-- start dev server `python manage.py runserver`
+- start dev server `python manage.py runserver 8080`
 
 ## Test
  `python manage.py test common` or `python -m unittest common`
- it will create a temp database based on the database setting for test
+ it will create a temp database based on the database setting for test the app common
 
  `python manage.py test common.utils_tests` test one file only
 
