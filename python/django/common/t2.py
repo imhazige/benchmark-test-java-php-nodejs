@@ -1,3 +1,7 @@
+import json
+import uuid
+
+
 from django.shortcuts import render
 
 # Create your views here.
@@ -10,8 +14,7 @@ from rest_framework.response import Response
 from common.models import TUSers
 from common.serializer import TUSersSerializer
 from . import log
-import json
-import uuid
+from . import jwt_permission
 
 
 class T2ViewSet(viewsets.ModelViewSet):
@@ -23,11 +26,11 @@ class T2ViewSet(viewsets.ModelViewSet):
     serializer_class = TUSersSerializer
 
     # https://www.django-rest-framework.org/api-guide/authentication/#how-authentication-is-determined
-    # authentication_classes = (MyJWTAuthentication)
-    # permission_classes = (MyIsAuthenticated)
+    authentication_classes = (jwt_permission.MyJSONWebTokenAuthentication,)
+    permission_classes = (jwt_permission.CustomerAccessPermission,)
 
     def create_(self, request):
-        log.debug('-----------------create')
+        # log.debug('-----------------create')
         # super(T1ViewSet, self).create(request)
 
         # TODO:set id, date

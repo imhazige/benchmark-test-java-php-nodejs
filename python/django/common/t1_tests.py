@@ -38,7 +38,8 @@ class T1Tests(APITestCase):
         # :fit the test case
         return {'id': id, 'name': id, 'password': '123456', 'create_time': now, 'update_time': now}
 
-    def set_up(self):
+    def setUp(self):
+        super().setUp()
         # this is not required, it will create a temp database when testing
         TUSers.objects.all().delete()
 
@@ -83,43 +84,3 @@ class T1Tests(APITestCase):
         # :get response body
         log.debug('response:{}', response.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-
-class T2Tests(APITestCase):
-
-    def __init__(self):
-        super()
-        self.loginUser = None
-        self.token = None
-
-    def setone(self):
-        id = str(uuid.uuid1())
-        now = datetime.now(tz=timezone.utc)
-        # :fit the test case
-        return {'id': id, 'name': id, 'password': '123456', 'create_time': now, 'update_time': now}
-
-    def set_up(self):
-        # this is not required, it will create a temp database when testing
-        TUSers.objects.all().delete()
-
-        # set up test user via t1 api
-        self.loginUser = self.create_one()
-        url = reverse('t2_token-list')
-        response = self.client.post(
-            url, {name: self.loginUser.name, password: self.loginUser.password}, format='json')
-        self.token
-
-    def create_one(self, **kwargs):
-        id = kwargs.get('id')
-        if id is None:
-            id = str(uuid.uuid1())
-            kwargs['id'] = id
-        if kwargs.get('name') is None:
-            kwargs['name'] = id
-
-        now = datetime.now(tz=timezone.utc)
-        kwargs['create_time'] = now
-        kwargs['update_time'] = now
-
-        u = TUSers.objects.create(**kwargs)
-        return u
