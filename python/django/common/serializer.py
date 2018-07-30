@@ -12,6 +12,7 @@ from . import log
 import binascii
 from django.core.signing import Signer
 import django.contrib.auth.hashers as hasher
+import hashlib
 
 
 class TUSersSerializer(serializers.ModelSerializer):
@@ -69,14 +70,11 @@ class TUSersSerializer(serializers.ModelSerializer):
         # dec = hasher.check_password(password, '%s$%s$%s$%s' %
         # (hashermethod, iteration, salt, passwordenced))
 
-        # sign make it more length
-        # signer = Signer(salt=salt)
-        # passwordenced = signer.sign(passwordenced)
-        # TODO:use md5 to make it shorter
-        passwordenced = hasher.make_password(
-            password, None, hasher='md5').split('$')[-1]
+        # :use md5 to make its length be 32
+        m = hashlib.md5()
 
-        print(len(passwordenced))
+        m.update(passwordenced.encode('utf-8'))
+        passwordenced = m.hexdigest()
 
         return (passwordenced, salt)
 
@@ -87,20 +85,19 @@ class TUSersSerializer(serializers.ModelSerializer):
         """
 
         # :salt and enctrypt
-        # see https://www.tunnelsup.com/using-salted-sha-hashes-with-dovecot-authentication/
         password = data['password']
         password = password.encode('utf-8')
         salt = os.urandom(16)
         (passpordstr, saltstr) = self.encrypt3(password, salt)
         data['password'] = passpordstr
         data['salt'] = saltstr
-        print(' here is ', data)
 
         ret = super().to_internal_value(data)
         return ret
 
     def to_representation(self, instance):
         ret = super().to_representation(instance)
+        # remove the security data when represent it to the api
         ret.pop("salt", None)
         ret.pop("password", None)
         return ret
