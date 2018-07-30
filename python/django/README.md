@@ -3,11 +3,11 @@
 - logging - django
 - database - django
 - uuid - 
-- JWT - 
+- JWT - [pyjwt](https://github.com/jpadilla/pyjwt)
 - encryption - pbkdf2_sha256
 
-- unit test - 
-- unit test - 
+- unit test - django
+- unit test - django
 
 
 ## Install

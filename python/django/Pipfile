@@ -7,6 +7,7 @@ name = "pypi"
 django = {version = "*", extras = ["bcrypt"]}
 mysqlclient = "==1.3.12"
 djangorestframework = "*"
+pyjwt = "*"
 
 [dev-packages]
 pylint-django = "*"

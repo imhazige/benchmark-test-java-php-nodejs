@@ -19,7 +19,7 @@ from django.conf.urls import url, include
 from rest_framework import routers, serializers, viewsets
 from common.t1 import T1ViewSet
 from common.t2 import T2ViewSet
-from common.t2 import T2TokenViewSet
+from common.jwt_auth_view import T2TokenViewSet
 
 router = routers.DefaultRouter()
 # t1

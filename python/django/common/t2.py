@@ -14,19 +14,6 @@ import json
 import uuid
 
 
-class T2TokenViewSet(viewsets.ModelViewSet):
-    """
-    inspired from https://github.com/GetBlimp/django-rest-framework-jwt/blob/master/docs/index.md
-    """
-
-    # see https://www.django-rest-framework.org/api-guide/viewsets/
-    def create(self, request, *args, **kwargs):
-        # TODO:check user
-
-        # TODO: create token
-        return Response('')
-
-
 class T2ViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list` and `detail` actions.
