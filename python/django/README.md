@@ -27,12 +27,26 @@ Download [mysql connctor](https://dev.mysql.com/downloads/connector/c/)
 See [The Python Dependency Tool](https://blog.kazge.com/python/2018/07/03/the-python-dependency-tool/)
 
 ## Run development
-go to app folder, run command
-`python manage.py runserver 8080`
+go to app folder, run command  
+`python manage.py runserver 8080`  
+using wsgi-express:  
+`python manage.py runmodwsgi --port=8080 --reload-on-changes`
 
 
 ## Run production
-
+refer to https://docs.djangoproject.com/en/2.0/howto/deployment/wsgi/modwsgi/
+refer to https://github.com/GrahamDumpleton/mod_wsgi#using-mod_wsgi-express-with-django
+here I use wsgi-express in windows as a example:  
+refer to [Running mod_wsgi on Windows](https://github.com/GrahamDumpleton/mod_wsgi/blob/develop/win32/README.rst)
+`scoop install php apache`  [install apache via scoop](https://github.com/lukesampson/scoop/wiki/Apache-with-PHP)  
+`scoop which httpd` #show the httpd folder
+`bash`
+`pipenv shell` 
+`MOD_WSGI_APACHE_ROOTDIR=~/scoop/apps/apache/current pipenv install mod_wsgi`
+`pipenv shell`
+`MOD_WSGI_APACHE_ROOTDIR=C:/Apache24 pipenv install mod_wsgi`
+`python manage.py collectstatic`
+`python manage.py runmodwsgi`
 
 ## Install [pipenv](https://github.com/pypa/pipenv)
 `sudo pip install pipenv`
