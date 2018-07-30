@@ -7,6 +7,7 @@ from datetime import datetime
 from rest_framework import viewsets
 
 from .models import TUSers
+from . import log
 
 
 class T2TokenViewSet(viewsets.ViewSet):
@@ -23,13 +24,15 @@ class T2TokenViewSet(viewsets.ViewSet):
         # TODO:check user
         name = request.data['name']
         password = request.data['password']
+        log.debug('----- {}', name)
         # refer to https://docs.djangoproject.com/en/2.0/topics/db/queries/#limiting-querysets
         user = TUSers.objects.filter(name=name)[:1]
         if user is None or user.count() < 1:
             # just response null
+            log.debug('no such user {}', name)
             return Response('')
         user = user[0]
-        # print('>>>>', user)
+        log.debug('>>>> {}', user)
         encoded = jwt.encode({'userId': user.id},
                              T2TokenViewSet.SECRET, T2TokenViewSet.ALGORITHM)
         # TODO: create token
