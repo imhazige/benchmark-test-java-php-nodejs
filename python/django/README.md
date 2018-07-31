@@ -29,30 +29,36 @@ See [The Python Dependency Tool](https://blog.kazge.com/python/2018/07/03/the-py
 ## Run development
 go to app folder, run command  
 `python manage.py runserver 8080`  
-using wsgi-express:  
+or using wsgi-express(if installed):  
 `python manage.py runmodwsgi --port=8080 --reload-on-changes`
 
 
 ## Run production
-refer to https://docs.djangoproject.com/en/2.0/howto/deployment/wsgi/modwsgi/
-refer to https://github.com/GrahamDumpleton/mod_wsgi#using-mod_wsgi-express-with-django
-here I use wsgi-express in windows as a example:  
-refer to [Running mod_wsgi on Windows](https://github.com/GrahamDumpleton/mod_wsgi/blob/develop/win32/README.rst)
-`scoop install php apache`  [install apache via scoop](https://github.com/lukesampson/scoop/wiki/Apache-with-PHP)  
-`scoop which httpd` #show the httpd folder
-`bash`
-`pipenv shell` 
-`MOD_WSGI_APACHE_ROOTDIR=~/scoop/apps/apache/current pipenv install mod_wsgi`
-`pipenv shell`
-`MOD_WSGI_APACHE_ROOTDIR=C:/Apache24 pipenv install mod_wsgi`
-`python manage.py collectstatic`
-`python manage.py runmodwsgi`
+refer to https://docs.djangoproject.com/en/2.0/howto/deployment/wsgi/modwsgi/  
+refer to https://github.com/GrahamDumpleton/mod_wsgi#using-mod_wsgi-express-with-django  
 
-## Install [pipenv](https://github.com/pypa/pipenv)
-`sudo pip install pipenv`
+### Via Docker:
+go to the project folder
+`docker build -t djangoapp .`  
+`docker run -it --rm -p 8080:80 -v <your project path>:/app --name djangoapp-run djangoapp`
+
+### Via Windows(tricky):
+refer to [Running mod_wsgi on Windows](https://github.com/GrahamDumpleton/mod_wsgi/blob/develop/win32/README.rst)  
+`scoop install php apache`  [install apache via scoop](https://github.com/lukesampson/scoop/wiki/Apache-with-PHP)    
+`scoop which httpd` #show the httpd folder  
+`bash`  
+`pipenv shell`   
+`MOD_WSGI_APACHE_ROOTDIR=~/scoop/apps/apache/current pipenv install mod_wsgi`  
+`pipenv shell`  
+`MOD_WSGI_APACHE_ROOTDIR=C:/Apache24 pipenv install mod_wsgi`  
+`python manage.py collectstatic`  
+`python manage.py runmodwsgi`  
+
+## Install [pipenv](https://github.com/pypa/pipenv)  
+`sudo pip install pipenv`  
 
 ## Setup project
-- initialize dependencies `pipenv install`  
+- initialize dependencies `pipenv install`   
 - load venv `pipenv shell`   
 - ~~django migrate `python manage.py makemigrations` `python manage.py migrate`~~
 - start dev server `python manage.py runserver 8080`
