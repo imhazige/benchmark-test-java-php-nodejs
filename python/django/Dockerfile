@@ -21,16 +21,16 @@ MAINTAINER Dockerfiles
 RUN apt-get update && \
     apt-get upgrade -y && \ 	
     apt-get install -y \
-	git \
-	python3 \
-	python3-dev \
-	python3-setuptools \
-	python3-pip \
-	nginx \
-	supervisor \
-	sqlite3 && \
-	pip3 install -U pip setuptools && \
-   rm -rf /var/lib/apt/lists/*
+    git \
+    python3 \
+    python3-dev \
+    python3-setuptools \
+    python3-pip \
+    nginx \
+    supervisor \
+    sqlite3 && \
+    pip3 install -U pip setuptools && \
+    rm -rf /var/lib/apt/lists/*
 
 # install uwsgi now because it takes a little while
 RUN pip3 install uwsgi
