@@ -28,6 +28,7 @@ See [The Python Dependency Tool](https://blog.kazge.com/python/2018/07/03/the-py
 
 ## Run development
 go to app folder, run command  
+set the environment variable DATABASE_HOST to the host of the mysql database, or you can chnage the default value in the setting.py
 `python manage.py runserver 8080`  
 or using wsgi-express(if installed):  
 `python manage.py runmodwsgi --port=8080 --reload-on-changes`
@@ -39,8 +40,8 @@ refer to https://github.com/GrahamDumpleton/mod_wsgi#using-mod_wsgi-express-with
 
 ### Via Docker:
 go to the project folder
-`docker build -t djangoapp .`  
-`docker run -it --rm -p 8080:80 -v <your project path>:/app --name djangoapp-run djangoapp`
+edit the docker-run.sh, change the value require your amend according to your machine environment
+`bash docker-run.sh`
 
 ### Via Windows(tricky):
 refer to [Running mod_wsgi on Windows](https://github.com/GrahamDumpleton/mod_wsgi/blob/develop/win32/README.rst)  
@@ -68,4 +69,10 @@ refer to [Running mod_wsgi on Windows](https://github.com/GrahamDumpleton/mod_ws
  it will create a temp database based on the database setting for test the app common
 
  `python manage.py test common.utils_tests` test one file only
+
+ ## Conclusion
+ I don't like python:
+ - Hard to deploy : need depend on WSGI, not a standalone runnable application, not easy to develop on windows.
+ - I don't like its syntax, the IDE can not do easily auto format. you have to check the indent if there are problem.
+
 

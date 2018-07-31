@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mod_wsgi.server',
+    # 'mod_wsgi.server',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +81,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'USER': 'root',
-        'HOST': 'localhost',
+        'HOST': os.environ.get('DATABASE_HOST', '10.0.75.1'),
         'PORT': '3306',
         'PASSWORD': 'root',
         'NAME': 'test_db',
