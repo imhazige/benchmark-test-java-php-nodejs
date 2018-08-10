@@ -30,8 +30,9 @@ Database is using Mysql.
 
 ## Java
  - [springboot](http://projects.spring.io/spring-boot/) - [project](./java/springboot)
- - [play-scala](https://playframework.com/) 
- - [kotlin](https://kotlinlang.org/)
+ - [kotlin](https://kotlinlang.org/)(springboot)
+ - ~~[play-scala](https://playframework.com/)~~(OUT)
+
 
 ## PHP
 - [laravel](https://laravel.com/)
@@ -45,6 +46,10 @@ Database is using Mysql.
 ## Python
 - [Django](https://www.djangoproject.com/) - [project](./python/django)
 - [nameko](https://nameko.readthedocs.io/)
+
+## Erlang
+- [phoenix](https://phoenixframework.org/) + [Elixir](https://elixir-lang.org)
+
 
 
 
