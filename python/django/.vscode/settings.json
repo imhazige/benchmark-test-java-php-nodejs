@@ -1,5 +1,5 @@
 {
   "python.pythonPath":
-    "C:\\Users\\Administrator\\.virtualenvs\\django-ihoBqunT\\Scripts\\python.exe",
+    "/Library/Frameworks/Python.framework/Versions/3.6/bin/python3",
   "python.linting.pylintArgs": ["--load-plugins=pylint_django"]
 }
