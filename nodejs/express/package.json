@@ -12,7 +12,7 @@
   "author": "Ka",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "hoek": "^5.0.3",
     "jsonwebtoken": "^8.1.0",
     "log4js": "^2.4.1",
