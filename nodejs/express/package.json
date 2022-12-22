@@ -14,7 +14,7 @@
   "dependencies": {
     "express": "^4.16.2",
     "hoek": "^5.0.3",
-    "jsonwebtoken": "^8.1.0",
+    "jsonwebtoken": "^9.0.0",
     "log4js": "^2.4.1",
     "mysql": "^2.15.0",
     "uuid": "^3.1.0"
